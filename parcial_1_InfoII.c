@@ -7,7 +7,7 @@
 typedef struct{
 	char calle1[50];
 	char calle2 [50];
-	int Trafico;
+	int Trafico;  
 }Semaforo;
 
 Semaforo* registrarDatos(Semaforo *datos, int *cantidad, char *calle1, char *calle2 ,int trafico) {
