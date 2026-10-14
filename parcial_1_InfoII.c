@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <time.h>
+#include <ctype.h>
 
 typedef struct{
 	char calle1[50];
@@ -10,7 +11,7 @@ typedef struct{
 }Semaforo;
 
 Semaforo* registrarDatos(Semaforo *datos, int *cantidad, char *calle1, char *calle2 ,int trafico) {
-    // Pedimos espacio para un disparo m�s
+
   Semaforo *temp = realloc(datos, (*cantidad + 1) * sizeof(Semaforo));
 
     if (temp == NULL) {
@@ -26,6 +27,28 @@ Semaforo* registrarDatos(Semaforo *datos, int *cantidad, char *calle1, char *cal
     (*cantidad)++;  // actualizamos el contador desde afuera via puntero
 	
     return datos;
+}
+
+int contiene(const char *texto, const char *patron) {
+    size_t lt = strlen(texto), lp = strlen(patron);
+    if (lp == 0) {
+        return 1;
+    } // if
+    if (lp > lt) {
+        return 0;
+    } // if
+    
+    size_t i;
+    for (i = 0; i + lp <= lt; i++) {
+        size_t j = 0;
+        while (j < lp && tolower((unsigned char) texto[i + j]) == tolower((unsigned char) patron[j])) {
+            j++;
+        } // while
+        if (j == lp) {
+            return 1;
+        } // if
+    } // for
+    return 0;
 }
 
 void mostrarRegistro(Semaforo *datos, int cantidad) {
@@ -80,7 +103,7 @@ void seleccionoCalle(Semaforo *str_semaforo ,char *callePpal, int *cantidad){
 void BuscoDato(char *calle1, char *calle2, Semaforo *arreglo, int cantidad) {
     int i, encontrado = 0;
     for (i = 0; i < cantidad; i++) {
-        if (strcmp(calle1, arreglo[i].calle1) == 0 && strcmp(calle2, arreglo[i].calle2) == 0) {
+        if (contiene(arreglo[i].calle1,calle1) && contiene(arreglo[i].calle2,calle2)) {
             printf("%-6d %-20s %-15s %-6d\n", i + 1, arreglo[i].calle1, arreglo[i].calle2, arreglo[i].Trafico);
             encontrado = 1;
             break;
