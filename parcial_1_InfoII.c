@@ -29,11 +29,11 @@ int main(int argc, char *argv[]) {
                 strcpy(centro_datos[*cont - 1].calle_principal, calle_ppal);
                 insertarCalle("Ingrese interseccion: \n", centro_datos[*cont - 1].calle_interseccion);
                 break;
-            } // case 1
+            } 
             case 2: {
                 mostrarRegistro(centro_datos, *cont);
                 break;
-            } // case 2
+            } 
             case 3: {
                 if (centro_datos == NULL || *cont == 0) {
                     printf("No hay registros cargados todavia.\n");
@@ -41,7 +41,7 @@ int main(int argc, char *argv[]) {
                 }
                 insertarCalle("Elija la nueva calle a evaluar: \n", calle_ppal);
                 break;
-            } // case 3
+            } 
             case 4: {
                 if (centro_datos == NULL || *cont == 0) {
                     printf("No hay registros cargados todavia.\n");
@@ -49,7 +49,7 @@ int main(int argc, char *argv[]) {
                 }
                 seleccionoCalle(centro_datos, calle_ppal, cont);
                 break;
-            } // case 4
+            } 
             case 5: {
                 if (centro_datos == NULL || *cont == 0) {
                     printf("No hay registros cargados todavia.\n");
@@ -57,17 +57,17 @@ int main(int argc, char *argv[]) {
                 }
                 buscoDato(centro_datos, *cont);
                 break;
-            } // case 5
+            } 
             case 6: {        
                 free(centro_datos);
                 bandera = 0;
                 break;
-            } // case 6
+            } 
             default: {
                 printf("Opcion invalida.\n");
                 break;
-            } // default
-        } // switch (opcion)
+            } 
+        } 
     } while (bandera != 0);
     
     return 0;
@@ -79,7 +79,7 @@ Semaforo* registrarDatos(Semaforo *datos, int *cantidad, int trafico) {
     if (temp == NULL) {
         printf("Error al reservar memoria.\n");
         return datos;  
-    } // if
+    } 
 
     datos = temp;
     datos[*cantidad].trafico = trafico;
@@ -94,8 +94,8 @@ void insertarCalle(const char *mensaje, char *calle) {
         size_t len = strlen(calle);
         if (len > 0 && calle[len - 1] == '\n') {
             calle[len - 1] = '\0';
-        } // if
-    } // if    
+        } 
+    }     
 }
  
 void insertarDosCalles(char *calle1, char *calle2) {
@@ -107,10 +107,10 @@ int contiene(const char *texto, const char *patron) {
     size_t lt = strlen(texto), lp = strlen(patron);
     if (lp == 0) {
         return 1;
-    } // if
+    } 
     if (lp > lt) {
         return 0;
-    } // if
+    } 
     
     size_t i;
     for (i = 0; i + lp <= lt; i++) {
@@ -120,8 +120,8 @@ int contiene(const char *texto, const char *patron) {
         } // while
         if (j == lp) {
             return 1;
-        } // if
-    } // for
+        } 
+    } 
     return 0;
 }
 
@@ -129,7 +129,7 @@ void mostrarRegistro(Semaforo *datos, int cantidad) {
     if (cantidad == 0) {
         printf("No hay datos registrados.\n");
         return;
-    } // if
+    } 
 
     printf("\n=== REGISTRO DE DATOS ===\n");
     printf("%-10s %-18s %-18s %-6s\n", "Registro", "Calle principal", "Interseccion", "Trafico");
@@ -138,7 +138,7 @@ void mostrarRegistro(Semaforo *datos, int cantidad) {
     int i;
     for (i = 0; i < cantidad; i++) {
         printf("%-6d %-18s %-18s %-4d\n", i + 1, datos[i].calle_principal, datos[i].calle_interseccion, datos[i].trafico);
-    } // for
+    } 
 }
 
 void seleccionoCalle(Semaforo *str_semaforo, char *calle_ppal, int *cantidad) {
@@ -161,8 +161,8 @@ int buscoDato(Semaforo *arreglo, int cantidad) {
         if (contiene(arreglo[i].calle_principal, calle_uno) && contiene(arreglo[i].calle_interseccion, calle_dos)) {
             printf("%-6d %-20s %-15s %-6d\n", i + 1, arreglo[i].calle_principal, arreglo[i].calle_interseccion, arreglo[i].trafico);
             return 1;
-        } // if
-    } // for
+        } 
+    } 
 
     printf("No se hallaron los datos\n");
     return 0;
