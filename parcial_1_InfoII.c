@@ -79,26 +79,14 @@ void nuevaCalle (char *callePpal){
 
 void seleccionoCalle(Semaforo *str_semaforo ,char *callePpal, int *cantidad){
 	int numero;
-	do{
-		printf("Ingrese por indice la nueva calle: \n" );
-		scanf("%d",&numero);
-	}while(numero<0 || numero >= *cantidad);
-	strcpy(callePpal,str_semaforo[numero].calle2);
+    do {
+        printf("Ingrese por indice la nueva calle: \n");
+        scanf("%d", &numero);
+        while (getchar() != '\n'); 
+    } while (numero <= 0 || numero > *cantidad);
+    
+    strcpy(callePpal, str_semaforo[numero - 1].calle2);
 }
-
-/*void BuscoDato(char *calle1, char *calle2, Semaforo *arreglo, int cantidad) {
-	int i;
-	int encontrado = 0;
-	for ( i = 0; i < cantidad; i++) {
-        int cmp1 = strcmp(calle1,arreglo[i].calle1);
-        int cmp2 = strcmp(calle2,arreglo[i].calle2);
-        if (cmp1== 0 && cmp2== 0){
-		printf("%-6d %-10s %-10s %-6s\n", i, arreglo[i].calle1, arreglo[i].calle2, arreglo[i].Trafico);
-		encontrado = 1;
-        return;  // ya lo encontró, no sigue buscando
-    	}
-	}
-}*/
 
 void BuscoDato(char *calle1, char *calle2, Semaforo *arreglo, int cantidad) {
     int i, encontrado = 0;
